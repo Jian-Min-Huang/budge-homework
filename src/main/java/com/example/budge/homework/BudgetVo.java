@@ -1,19 +1,31 @@
 package com.example.budge.homework;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.time.LocalDate;
 
-@Builder(toBuilder = true)
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class BudgetVo {
 
     private LocalDate yearMonth;
 
     private Integer amount;
+
+    public BudgetVo(LocalDate yearMonth, Integer amount) {
+        this.yearMonth = yearMonth;
+        this.amount = amount;
+    }
+
+    public LocalDate getYearMonth() {
+        return yearMonth;
+    }
+
+    public void setYearMonth(LocalDate yearMonth) {
+        this.yearMonth = yearMonth;
+    }
+
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
 }

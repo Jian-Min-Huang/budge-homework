@@ -1,17 +1,13 @@
 package com.example.budge.homework;
 
-import lombok.extern.slf4j.Slf4j;
-
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
-@Slf4j
 public class BudgetCalculator {
 
     private DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyyMM");
@@ -37,10 +33,7 @@ public class BudgetCalculator {
         }
 
         List<BudgetVo> budgetVos = new ArrayList<>(budgetRepo.getAll().stream()
-                .map(budget -> BudgetVo.builder()
-                        .yearMonth(LocalDate.parse(budget.getYearMonth() + "01", df2))
-                        .amount(budget.getAmount())
-                        .build())
+                .map(budget -> new BudgetVo(LocalDate.parse(budget.getYearMonth() + "01", df2), budget.getAmount()))
                 .filter(budgetVo -> monthRange.contains(df.format(budgetVo.getYearMonth())))
                 .collect(toList()));
 
@@ -60,10 +53,7 @@ public class BudgetCalculator {
         }
 
         List<Double> priceUnitEachMonth = budgetRepo.getAll().stream()
-                .map(budget -> BudgetVo.builder()
-                        .yearMonth(LocalDate.parse(budget.getYearMonth() + "01", df2))
-                        .amount(budget.getAmount())
-                        .build())
+                .map(budget -> new BudgetVo(LocalDate.parse(budget.getYearMonth() + "01", df2), budget.getAmount()))
                 .filter(budgetVo -> monthRange.contains(df.format(budgetVo.getYearMonth())))
                 .collect(toList())
                 .stream()
